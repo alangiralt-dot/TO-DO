@@ -3,7 +3,7 @@
 /**
  * Used for setting up the routing in the system
  * EDB 06-1-26: Defines the specific controller to be instantiated based on the URI passed on the request:
- *  if matches a specified route in the routliste instantiates a controller based on the parameters of the routes list, a trigers an action specifict to the controllers class.
+ *  if matches a specified route in the route list, it instantiates an specific controller class based on the specification on the routes list, and it trigers an action of the correspondent controller class.
  */
 class Router
 {
@@ -21,10 +21,10 @@ class Router
 
 			// tries to find a simple route
 			$routeFound = $this->_getSimpleRoute($routes, $controller, $action);
-			//EDB 06-1-26: _getSimpleRoute is a generic method to retrieve the a controller and an action in the routes list. It probably fails for routes with parameters
+			//EDB 06-1-26: _getSimpleRoute is a generic method to retrieve the a controller and its action from the routes list. It probably fails for the routes that have specified parameters.
 			if (!$routeFound) {
 				// tries to find the a matching "parameter route"
-				//EDB 06-1-26: this method is more sophisticated compared to _getSimpleRoute as it handles the parameters that are part of the route.
+				//EDB 06-1-26: this method is more sophisticated compared to _getSimpleRoute, as it handles the parameters that are passed in the route.
 				$routeFound = $this->_getParameterRoute($routes, $controller, $action);
 			}
 
@@ -73,25 +73,25 @@ class Router
 	 * @param string $action the action to execute (sent as reference)
 	 * @return boolean
 	 */
-	protected function _getSimpleRoute($routes, &$controller, &$action) //EDB 06-1-26: it points to the global reference: action and controler in execute()
+	protected function _getSimpleRoute($routes, &$controller, &$action) //EDB 06-1-26: it points to the references of action and controler in execute()
 	{
 		// fetches the URI
 		$uri = $this->_getUri();
 
 		// if the route isn't defined, try to add a trailing slash
-		if (isset($routes[$uri])) { //EDB 06-1-26: the request URI exists in the routes matrix, it is retreive from the matrix.
+		if (isset($routes[$uri])) { //EDB 06-1-26: check if the request URI(route) exists in the routes list, if so, it is retreive from the matrix.
 			$routeFound = $routes[$uri];
 		} else if (isset($routes[$uri . '/'])) {
-			$routeFound = $routes[$uri . '/']; //EDB 06-1-26: the request URI does not exist is incorrect, new attempt with separator.
+			$routeFound = $routes[$uri . '/']; //EDB 06-1-26: the request URI does not exist, new attempt with separator '/'.
 		} else {
 			$uri = substr($uri, 0, -1);
 			// fetches the current route
-			$routeFound = isset($routes[$uri]) ? $routes[$uri] : false; //EDB 06-1-26: tries retreiving the uri from the array without '/'
+			$routeFound = isset($routes[$uri]) ? $routes[$uri] : false; //EDB 06-1-26: tries removing the last '/' from the uri
 		}
 
 		// if a matching route was found
 		if ($routeFound) {
-			list($name, $action) = explode('#', $routeFound); //EDB 06-1-26: Decomposes the route format Controller#Action, action = method
+			list($name, $action) = explode('#', $routeFound); //EDB 06-1-26: Decomposes the route format Controller#Action, action = method in controller
 
 			// initializes the controller
 			$controller = $this->_initializeController($name);
@@ -117,13 +117,13 @@ class Router
 		// testing routes with parameters
 		foreach ($routes as $route => $path) {
 			if ($this->hasParameters($route)) {
-				$uriParts = explode('/:', $route); //EDB 06-1-26: se separan los parametros de la ruta e.g. /Usuarios#TaskList/:id=akdabime42s5 -> uriParts = ['/Usuarios#TaskList','id=akdabime42s5']
+				$uriParts = explode('/:', $route); //EDB 06-1-26: split the parameters in the route into an array e.g. /Usuarios#TaskList/:id=akdabime42s5 -> uriParts = ['/Usuarios#TaskList','id=akdabime42s5']
 
 				$pattern = '/^';
 				//$pattern .= '\\'.($uriParts[0] == '' ? '/' : $uriParts[0]); -- EDB 06-1-26: to be ignored!!
 				/*EDB 06-1-26: a regex pattern is going to be built here:
-				*	1. If first part of uri is not defined $uriParts[0] == '' add a separator (escaped bar) '/^\/
-				*	2. If not empty add repalce the separators with escaped bars e.g '/Usuarios#TaskList' -> '/^\/Usuarios#TaskList\/'
+				*	1. If the first part of uri is not defined $uriParts[0] == '' add a separator (escaped bar) '/^\/
+				*	2. If it is not blank, repalce the separators with escaped bars e.g '/Usuarios#TaskList' -> '/^\/Usuarios#TaskList\/'
 				*	3. For each parameter add a regex pattern except the first part, e.g. '/^\/Usuarios#TaskList\/([a-zA-Z0-9]+)'
 				*	4. add end slashes pattern e.g. '/^\/Usuarios\/([a-zA-Z0-9]+)[\/]{0,1}$/'
 				*/
