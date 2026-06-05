@@ -132,6 +132,20 @@ This scenario describes the user procedure to modify an existing task.
     7. The server process the request, and updates the existing record in the database.
     8. The server renders and responds with a `taskView` with the task record that was modified, no other tasks are displayed.
 
+## 🗑️ Delete Task
+This scenario describes the user procedure to delete an existing task.
+
+### Actor: Generic User
+### Goal: Delete an existing task record in the `task table`.
+### Pre-conditions: Open App, Add Task(the database contains data), the `task table`contains data.
+### Scenarios:
+- Main success scenario:
+    1. The user clicks on the `deleteTask icon` 🗑️ , in a specific row of the table.
+    2. An element demands the user to confirm the action.
+    3. If the user accepts the warning, the browser sends a request to the server with the `id` of the task.
+    4. The server deletes the reccord of the corresponding task in the database.
+    5. The server renders and responds with a `BlankView` with an element containing the server message confirming the deletion of the task.
+
 # Option features:
 
 - Order task by criteria (optional).
