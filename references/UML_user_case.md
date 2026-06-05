@@ -14,11 +14,25 @@ The use cases described here cover the core functionality of the application, wh
 This scenario describes the user procedure and requriements to initialize the app.
 
 ### Actor: Generic User
+### Goal: Open for a first time the app TO-DO.
 ### Pre-conditions: Access to internet through a browser.
 ### Scenarios:
 - Main success scenario:
     1. User inputs URL in the search bar.
     2. The browser sends a request to the server.
     3. Server builds and respond to the user landing page using the `firstView` object.
-    
-     
+
+@startuml
+title Open App - Main Success Scenario
+
+actor User
+participant Browser
+participant Server
+
+User -> Browser : Input URL in the search bar
+Browser -> Server : Send HTTP request
+Server -> Server : Build landing page (firstView object)
+Server --> Browser : Respond with landing page
+Browser --> User : Display landing page
+
+@enduml
