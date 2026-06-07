@@ -1,0 +1,25 @@
+@startuml
+title Delete Task - Main Success Scenario
+
+actor "Generic User" as User
+participant Browser
+participant Server
+database "Persistence Model" as Persistence
+
+User -> Browser : Click "deleteTask" icon on a table row
+Browser -> User : Show confirmation prompt
+
+alt user confirms
+    User -> Browser : Accept confirmation
+    Browser -> Server : Send delete request with task id
+    Server -> Persistence : Delete record by id
+    Persistence --> Server : Confirm deletion
+    Server -> Server : Render BlankView with confirmation message
+    Server --> Browser : Respond with BlankView
+    Browser --> User : Display confirmation of deletion
+else user cancels
+    User -> Browser : Dismiss confirmation
+    note right of Browser : No request sent;\nuser stays on current view
+end
+
+@enduml

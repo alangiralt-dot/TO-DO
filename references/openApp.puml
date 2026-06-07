@@ -1,0 +1,14 @@
+@startuml
+title Open App - Main Success Scenario
+
+actor "Generic User"
+participant Browser
+participant Server
+
+"Generic User" -> Browser : Input URL in the search bar
+Browser -> Server : Send HTTP request
+Server -> Server : Build landing page (blankView object)
+Server --> Browser : Respond with the landing page
+Browser --> "Generic User" : Display landing page
+
+@enduml

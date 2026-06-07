@@ -1,0 +1,17 @@
+@startuml
+title List All Tasks - Main Success Scenario
+
+actor "Generic User" as User
+participant Browser
+participant Server
+database "Persistence Model" as Persistence
+
+User -> Browser : Click "viewAll" button
+Browser -> Server : Send generic request (no filters)
+Server -> Persistence : Query all tasks
+Persistence --> Server : Return all tasks
+Server -> Server : Render TaskView with task table
+Server --> Browser : Respond with TaskView
+Browser --> User : Display all tasks
+
+@enduml

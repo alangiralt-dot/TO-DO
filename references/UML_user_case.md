@@ -20,22 +20,10 @@ This scenario describes the user procedure and requriements to initialize the ap
 - Main success scenario:
     1. User inputs URL in the search bar.
     2. The browser sends a request to the server.
-    3. Server builds and respond to the user landing page using the `blankView` object.
+    3. Server builds and respond to the user with the landing page using the `blankView` object.
 
-@startuml
-title Open App - Main Success Scenario
+![openApp](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/openApp.puml)
 
-actor User
-participant Browser
-participant Server
-
-User -> Browser : Input URL in the search bar
-Browser -> Server : Send HTTP request
-Server -> Server : Build landing page (firstView object)
-Server --> Browser : Respond with landing page
-Browser --> User : Display landing page
-
-@enduml
 
 ## 🔨 Add Task
 This scenario describes the user procedure to add a task in the app TO-DO.
@@ -53,31 +41,7 @@ This scenario describes the user procedure to add a task in the app TO-DO.
     6. The server process the request, and writes a new record in the persistence file.
     7. The server renders and responds with a `taskView` with the task record just created, no other tasks are displayed.
 
-@startuml
-title Add Task - Main Success Scenario
-
-actor User
-participant Browser
-participant Server
-database "Persistence File" as Persistence
-
-User -> Browser : Click "addTask" (from blankView or taskView)
-Browser -> Server : Request add-task form
-Server --> Browser : Respond with formView rendered
-Browser --> User : Display form (status, start_time pre-filled)
-
-User -> Browser : Input fields (description, created by,\nstatus, start_time, end_time)
-User -> Browser : Click "add" (submit)
-Browser -> Server : Submit form data
-
-Server -> Persistence : Write new task record
-Persistence --> Server : Confirm write
-
-Server -> Server : Render taskView with created task
-Server --> Browser : Respond with taskView
-Browser --> User : Display taskView with new task
-
-@enduml
+![addTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/addTask.puml)
 
 - Alternative flow - users cancels add task:
     1. At step 5: the user cancel the request by clicking on `cancel`.
@@ -99,21 +63,23 @@ This scenario describes the user procedure to retreive one or more task, based o
     5. The server interrogates the persistance model to find the tasks that match all the criteria input by the user.
     6. The server renders the `TaskView` with the task table containing all the tasks matching the criteria, as a response to the user. The filter bars has all the fields empty on the `TaskView` always.
 
+![listTasksByCriteria](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/listTasksByCriteria.puml)
+
 
 ## ✅ List all tasks
 This scenario describes the user procedure to retreive all the tasks.
 
 ### Actor: Generic User
-### Goal: Visualize one or more task that matches the specific attributes input by the user.
+### Goal: Visualize all the task that have been added in the database of the TO-DO app.
 ### Pre-conditions: Open App, Add Task(the database contains data), the `task table`could either contain data or not.
 ### Scenarios:
 - Main success scenario:
-    1. The user inputs the criteria she/he wants to use to filter the database, using the fields on the `filter bar` of the `TaskView` or the `BlankView`: status,  from (start time), to (end time), key words (description), createdBy.
-    2. The user click on the `search icon` 🔍.
-    3. The browser generates the request based on the parameter(fields) compiled by the user.
-    4. The server process the request and interrogates the persistance model to find the tasks that match all the criteria input by the user.
-    5. The server renders the `TaskView` with the `task table` containg all the task matching the criteria, and responds to the user.
+    1. The user click on the `viewAll` button.
+    3. The browser generates a generic request.
+    4. The server process the request and interrogates the persistance model to get all the tasks data.
+    5. The server renders the `TaskView` with the `task table` containg all the tasks in the database, and responds to the user.
 
+![ListAllTasks](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/viewAllTasks.puml)
 
 ## ✏️ Update Task
 This scenario describes the user procedure to modify an existing task.
@@ -132,6 +98,8 @@ This scenario describes the user procedure to modify an existing task.
     7. The server process the request, and updates the existing record in the database.
     8. The server renders and responds with a `taskView` with the task record that was modified, no other tasks are displayed.
 
+![updateTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/updateTask.puml)
+
 ## 🗑️ Delete Task
 This scenario describes the user procedure to delete an existing task.
 
@@ -146,7 +114,9 @@ This scenario describes the user procedure to delete an existing task.
     4. The server deletes the reccord of the corresponding task in the database.
     5. The server renders and responds with a `BlankView` with an element containing the server message confirming the deletion of the task.
 
-# Option features:
+![deleteTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/deleteTask.puml)
+
+# Option features to be developed:
 
 - Order task by criteria (optional).
 - Use JavaScript to modify a row within the table view.

@@ -1,0 +1,21 @@
+@startuml
+title Filter Tasks by Criteria - Main Success Scenario
+
+actor "Generic User" as User
+participant Browser
+participant Server
+database "Persistence Model" as Persistence
+
+User -> Browser : Input filter criteria\n(status, from, to, key words, createdBy)
+User -> Browser : Click search icon
+Browser -> Server : Send request with compiled filter parameters
+
+Server -> Server : Validate request,\nignore empty parameters
+Server -> Persistence : Query tasks matching all criteria
+Persistence --> Server : Return matching tasks
+
+Server -> Server : Render TaskView\n(task table + empty filter bar)
+Server --> Browser : Respond with TaskView
+Browser --> User : Display matching tasks
+
+@enduml

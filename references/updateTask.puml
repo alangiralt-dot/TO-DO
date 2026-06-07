@@ -1,0 +1,26 @@
+@startuml
+title Update Task - Main Success Scenario
+
+actor "Generic User" as User
+participant Browser
+participant Server
+database "Persistence Model" as Persistence
+
+User -> Browser : Click "updateTask" icon on a table row
+Browser -> Server : Request task by id
+Server -> Persistence : Retrieve task data by id
+Persistence --> Server : Return task data
+Server --> Browser : Respond with formView (fields pre-populated)
+Browser --> User : Display pre-filled form
+
+User -> Browser : Modify field(s)
+User -> Browser : Click "save" (submit)
+Browser -> Server : Submit updated task data
+
+Server -> Persistence : Update existing record
+Persistence --> Server : Confirm update
+Server -> Server : Render TaskView with modified task
+Server --> Browser : Respond with TaskView
+Browser --> User : Display modified task (only this task)
+
+@enduml

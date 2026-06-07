@@ -1,0 +1,25 @@
+@startuml
+title Add Task - Main Success Scenario
+
+actor User
+participant Browser
+participant Server
+database "Persistence Model" as Persistence
+
+User -> Browser : Click "addTask" (from blankView or taskView)
+Browser -> Server : Request add-task form
+Server --> Browser : Respond with formView rendered
+Browser --> User : Display form (status, start_time pre-filled)
+
+User -> Browser : Input fields (description, created by,\nstatus, start_time, end_time)
+User -> Browser : Click "add" (submit)
+Browser -> Server : Submit form data
+
+Server -> Persistence : Write new task record
+Persistence --> Server : Confirm write
+
+Server -> Server : Render taskView with created task
+Server --> Browser : Respond with taskView
+Browser --> User : Display taskView with new task
+
+@enduml
