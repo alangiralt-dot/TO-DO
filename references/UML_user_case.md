@@ -22,7 +22,7 @@ This scenario describes the user procedure and requriements to initialize the ap
     2. The browser sends a request to the server.
     3. Server builds and respond to the user with the landing page using the `blankView` object.
 
-![openApp](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/openApp.puml)
+![openApp](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/uml-diagrams/openApp.puml)
 
 
 ## 🔨 Add Task
@@ -41,7 +41,7 @@ This scenario describes the user procedure to add a task in the app TO-DO.
     6. The server process the request, and writes a new record in the persistence file.
     7. The server renders and responds with a `taskView` with the task record just created, no other tasks are displayed.
 
-![addTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/addTask.puml)
+![addTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/uml-diagrams/addTask.puml)
 
 - Alternative flow - users cancels add task:
     1. At step 5: the user cancel the request by clicking on `cancel`.
@@ -63,7 +63,7 @@ This scenario describes the user procedure to retreive one or more task, based o
     5. The server interrogates the persistance model to find the tasks that match all the criteria input by the user.
     6. The server renders the `TaskView` with the task table containing all the tasks matching the criteria, as a response to the user. The filter bars has all the fields empty on the `TaskView` always.
 
-![listTasksByCriteria](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/listTasksByCriteria.puml)
+![listTasksByCriteria](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/uml-diagrams/listTasksByCriteria.puml)
 
 
 ## ✅ List all tasks
@@ -79,7 +79,7 @@ This scenario describes the user procedure to retreive all the tasks.
     4. The server process the request and interrogates the persistance model to get all the tasks data.
     5. The server renders the `TaskView` with the `task table` containg all the tasks in the database, and responds to the user.
 
-![ListAllTasks](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/viewAllTasks.puml)
+![ListAllTasks](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/uml-diagrams/viewAllTasks.puml)
 
 ## ✏️ Update Task
 This scenario describes the user procedure to modify an existing task.
@@ -98,7 +98,7 @@ This scenario describes the user procedure to modify an existing task.
     7. The server process the request, and updates the existing record in the database.
     8. The server renders and responds with a `taskView` with the task record that was modified, no other tasks are displayed.
 
-![updateTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/updateTask.puml)
+![updateTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/uml-diagrams/updateTask.puml)
 
 ## 🗑️ Delete Task
 This scenario describes the user procedure to delete an existing task.
@@ -114,7 +114,7 @@ This scenario describes the user procedure to delete an existing task.
     4. The server deletes the reccord of the corresponding task in the database.
     5. The server renders and responds with a `BlankView` with an element containing the server message confirming the deletion of the task.
 
-![deleteTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/deleteTask.puml)
+![deleteTask](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/alangiralt-dot/TO-DO/main/references/uml-diagrams/deleteTask.puml)
 
 # Option features to be developed:
 
