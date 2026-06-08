@@ -91,7 +91,7 @@ class View
 		return $this->_layout;
 	}
 	
-	public function setLayout($layout)
+	public function setLayout($layout)//EDB 06-2-26: Defines the name of the layout to be used for content posting
 	{
 		$this->_layout = $layout;
 		

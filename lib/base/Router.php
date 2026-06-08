@@ -123,8 +123,8 @@ class Router
 				//$pattern .= '\\'.($uriParts[0] == '' ? '/' : $uriParts[0]); -- EDB 06-1-26: to be ignored!!
 				/*EDB 06-1-26: a regex pattern is going to be built here:
 				*	1. If the first part of uri is not defined $uriParts[0] == '' add a separator (escaped bar) '/^\/
-				*	2. If it is not blank, repalce the separators with escaped bars e.g '/Usuarios#TaskList' -> '/^\/Usuarios#TaskList\/'
-				*	3. For each parameter add a regex pattern except the first part, e.g. '/^\/Usuarios#TaskList\/([a-zA-Z0-9]+)'
+				*	2. If it is not blank, repalce the separators with escaped bars e.g '/Usuarios' -> '/^\/Usuarios\/'
+				*	3. For each parameter add a regex pattern except the first part, e.g. '/^\/Usuarios\/([a-zA-Z0-9]+)'
 				*	4. add end slashes pattern e.g. '/^\/Usuarios\/([a-zA-Z0-9]+)[\/]{0,1}$/'
 				*/
 				if ($uriParts[0] == '') {
