@@ -1,15 +1,70 @@
 <!DOCTYPE html>
 <html lang="ES-es">
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TO-DO</title>
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body>
+<body class="bg-indigo-50 min-h-screen flex flex-col font-sans">
+	<!-- Header -->
+	<header class="bg-white border-b border-gray-100 px-20 py-4 flex items-center justify-between">
+		<div class="flex items-center gap-4">
+			<div class="bg-indigo-600 rounded-2xl p-2.5">
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
+					stroke="currentColor" stroke-width="2.5">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+				</svg>
+			</div>
+			<div>
+				<h1 class="text-2xl font-bold text-gray-900 leading-tight">TO-DO</h1>
+				<p class="text-sm text-gray-400">Focus on what matters, one task at a time.</p>
+			</div>
+		</div>
+		<div class="flex gap-2">
+			<button
+				class="bg-indigo-100 border-3 border-indigo-400 hover:bg-indigo-400 hover:border-gray-200 text-gray-600 px-5 py-2 rounded-xl font-medium text-sm transition-colors">Add
+				Task</button>
+			<button
+				class="bg-indigo-100 border-3 border-indigo-400 hover:bg-indigo-400 hover:border-gray-200 text-gray-600 px-5 py-2 rounded-xl font-medium text-sm transition-colors">View
+				All</button>
+		</div>
+	</header>
+
+	<!-- Main content -->
 	<?php echo $this->content(); ?>
+
+	<!-- Footer -->
+	<footer class="bg-white border-t border-gray-100 px-20 py-4 flex items-center justify-between">
+		<div class="flex items-center gap-3">
+			<div class="bg-indigo-600 rounded-lg p-1.5">
+				<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24"
+					stroke="currentColor" stroke-width="2.5">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+				</svg>
+			</div>
+			<span class="text-gray-500 text-sm">TO-DO · Focus on what matters.</span>
+		</div>
+		<div class="flex items-center gap-4">
+			<span class="text-gray-400 text-sm">© 2026 TO-DO App</span>
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 hover:text-gray-600 cursor-pointer"
+				fill="currentColor" viewBox="0 0 24 24">
+				<path
+					d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+			</svg>
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 hover:text-gray-600 cursor-pointer"
+				fill="currentColor" viewBox="0 0 24 24">
+				<path
+					d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+			</svg>
+		</div>
+	</footer>
+
+	<!-- Floating help button -->
+	<button class="fixed bottom-5 right-5 bg-gray-100 hover:bg-gray-200 text-gray-500 w-9 h-9 rounded-full text-sm font-semibold shadow-md transition-colors">?</button>
 </body>
 
 </html>
