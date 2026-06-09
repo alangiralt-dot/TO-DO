@@ -1,0 +1,54 @@
+			<form method="POST" fromaction="Edwin: Ruta por definir"
+			    class="w-full bg-slate-100 border-2 border-indigo-100 px-8 py-4 rounded-xl flex items-end gap-4">
+
+			    <div class="flex flex-col gap-1">
+			        <label class="text-xs font-medium text-gray-500" for="status">Status</label>
+			        <select
+			            class="border border-gray-200 rounded-xl px-3 py-2 bg-white text-gray-700 text-sm min-w-[120px] focus:outline-none focus:ring-2 focus:ring-indigo-300"
+			            name="status" id="status">
+			            <option value="" selected disabled>-- Select --</option>
+			            <option value="pending">Pending</option>
+			            <option value="in-progress">In Progress</option>
+			            <option value="completed">Completed</option>
+			        </select>
+			    </div>
+			    <div class="flex flex-col gap-1">
+			        <label class="text-xs font-medium text-gray-500" for="from">From</label>
+			        <input type="time" name="from" id="from"
+			            class="border border-gray-200 rounded-xl px-3 py-2 bg-white text-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+			    </div>
+			    <div class="flex flex-col gap-1">
+			        <label class="text-xs font-medium text-gray-500" for="to">To</label>
+			        <input type="time" name="to" id="to"
+			            class="border border-gray-200 rounded-xl px-3 py-2 bg-white text-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+			    </div>
+			    <div class="flex flex-col gap-1 flex-1">
+			        <label class="text-xs font-medium text-gray-500" for="keywords">Keywords</label>
+			        <input type="text" placeholder="Search keywords..." name="keywords" id="keywords"
+			            class="border border-gray-200 rounded-xl px-3 py-2 bg-white text-gray-400 text-sm w-full focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+			    </div>
+			    <div class="flex flex-col gap-1 flex-1">
+			        <label class="text-xs font-medium text-gray-500" for="createdBy">Created By</label>
+			        <input type="text" placeholder="User name..." name="createdBy" id="createdBy"
+			            class="border border-gray-200 rounded-xl px-3 py-2 bg-white text-gray-400 text-sm w-full focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+			    </div>
+			    <div class="flex gap-2">
+			        <button type="submit"
+			            class="bg-indigo-600 hover:bg-indigo-900 text-white p-2.5 rounded-xl transition-colors"
+			            title="Search task by criteria">
+			            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+			                stroke="currentColor" stroke-width="2">
+			                <path stroke-linecap="round" stroke-linejoin="round"
+			                    d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+			            </svg>
+			        </button>
+			        <button href="EDWIN: definir ruta"
+			            class="bg-gray-200 hover:bg-gray-300 text-gray-500 p-2.5 rounded-xl ring-2 ring-gray-300 transition-colors"
+			            title="Clean filters">
+			            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+			                stroke="currentColor" stroke-width="2">
+			                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+			            </svg>
+			        </button>
+			    </div>
+			</form>
