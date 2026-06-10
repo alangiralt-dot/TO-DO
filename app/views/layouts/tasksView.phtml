@@ -2,6 +2,8 @@
 
 $tasks = $this->_data['tasks'];
 
+echo buildTableView($tasks);
+
 function buildTableView(array $tasks): string
 {
     ob_start();
