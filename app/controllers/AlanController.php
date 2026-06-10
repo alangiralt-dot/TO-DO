@@ -20,4 +20,8 @@ class AlanController extends ApplicationController {
         
         $this->view->breakConventionToReuseViews('partials/_response.phtml');
     }
+    public function createAction() {
+        $this->view->breakConventionToReuseViews('partials/_form.phtml');
+    }
+
 }
