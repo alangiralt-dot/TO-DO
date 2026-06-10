@@ -44,20 +44,20 @@ function printRowTable(int $index, Task $task): string
     echo match ($task->getStatusEnum()) {
         Status::PENDING => ' bg-indigo-100 text-indigo-400">' . $task->getStatus() . '</span></td>' . PHP_EOL,
         Status::INPROGRESS => ' bg-yellow-100 text-yellow-600">' . $task->getStatus() . '</span></td>' . PHP_EOL,
-        Status::COMPLETED => ' bg-green-100 text-indigo-400">' . $task->getStatus() . '</span></td>' . PHP_EOL,
+        Status::COMPLETED => ' bg-green-100 text-green-600">' . $task->getStatus() . '</span></td>' . PHP_EOL,
     };
     echo '<td class="px-6 py-4">' . $task->getStartTime() . '</td>' . PHP_EOL;
     echo '<td class="px-6 py-4">' . $task->getEndTime() . '</td>' . PHP_EOL;
     echo '<td class="px-6 py-4">' . $task->getCreatedBy() . '</td>' . PHP_EOL;
     echo "<td class=\"px-6 py-4 flex items-center gap-3 \">
-							<a href=\"/edit/{$task->getId()}\" class=\"text-gray-400 hover:text-indigo-600 transition-colors\">
+							<a href=\"/Alan: ruta por definir/{$task->getId()}\" class=\"text-gray-400 hover:text-indigo-600 transition-colors\">
 								<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"w-6 h-6\" fill=\"none\" viewBox=\"0 0 24 24\"
 									stroke=\"currentColor\" stroke-width=\"2\">
 									<path stroke-linecap=\"round\" stroke-linejoin=\"round\"
 										d=\"M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 0 1 2.828 2.828L11.828 15.828a2 2 0 0 1-1.414.586H9v-2a2 2 0 0 1 .586-1.414z\" />
 								</svg>
 							</a>
-							<a href=\"/delete/{$task->getId()}\" class=\"text-gray-400 hover:text-red-500 transition-colors\">
+							<a href=\"/Alan: ruta por definir/{$task->getId()}\" class=\"text-gray-400 hover:text-red-500 transition-colors\">
 								<svg xmlns=\"http://www.w3.org/2000/svg\" class=\"w-6 h-6\" fill=\"none\" viewBox=\"0 0 24 24\"
 									stroke=\"currentColor\" stroke-width=\"2\">
 									<path stroke-linecap=\"round\" stroke-linejoin=\"round\"
