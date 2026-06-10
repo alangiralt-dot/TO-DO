@@ -3,8 +3,8 @@ require 'Status.php';
 class Task
 {
     private Status $status;
-    private DateTime $startTime;
-    private DateTime $endTime;
+    private DateTime $to;
+    private DateTime $from;
 
     public function __construct(
         private string $id,
@@ -15,8 +15,8 @@ class Task
         private string $createdBy
     ) {
         $this->status = Status::from($statusValue);
-        $this->startTime = DateTime::createFromFormat('H:i', $startTimeValue, new DateTimeZone(date_default_timezone_get()));
-        $this->endTime = DateTime::createFromFormat('H:i', $endTimeValue, new DateTimeZone(date_default_timezone_get()));
+        $this->from = DateTime::createFromFormat('H:i', $startTimeValue, new DateTimeZone(date_default_timezone_get()));
+        $this->to = DateTime::createFromFormat('H:i', $endTimeValue, new DateTimeZone(date_default_timezone_get()));
     }
 
     public function getStatus(): string
@@ -39,14 +39,14 @@ class Task
         return $this->description;
     }
 
-    public function getStartTime(): string
+    public function getTo(): string
     {
-        return $this->startTime->format('H:i');
+        return $this->to->format('H:i');
     }
 
-    public function getEndTime(): string
+    public function getFrom(): string
     {
-        return $this->endTime->format('H:i');
+        return $this->from->format('H:i');
     }
 
     public function getCreatedBy(): string
@@ -69,14 +69,14 @@ class Task
         $this->description = $description;
     }
 
-    public function setStartTime(string $startTimeValue)
+    public function setTo(string $startTimeValue)
     {
-        $this->startTime = DateTime::createFromFormat('H:i', $startTimeValue, new DateTimeZone(date_default_timezone_get()));
+        $this->to = DateTime::createFromFormat('H:i', $startTimeValue, new DateTimeZone(date_default_timezone_get()));
     }
 
-    public function setEndTime(string $endTimeValue)
+    public function setFrom(string $endTimeValue)
     {
-        $this->endTime = DateTime::createFromFormat('H:i', $endTimeValue, new DateTimeZone(date_default_timezone_get()));
+        $this->from = DateTime::createFromFormat('H:i', $endTimeValue, new DateTimeZone(date_default_timezone_get()));
     }
 
     public function setCreatedBy(string $createdBy)
@@ -90,8 +90,8 @@ class Task
             'id' => $this->getId(),
             'description' => $this->getDescription(),
             'status' => $this->getStatus(),
-            'start_time' => $this->getStartTime(),
-            'end_time' => $this->getEndTime(),
+            'end_time' => $this->getFrom(),
+            'start_time' => $this->getTo(),
             'created_by' => $this->getCreatedBy()
         );
     }

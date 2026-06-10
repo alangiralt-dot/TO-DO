@@ -7,7 +7,6 @@
 class ApplicationController extends Controller
 {
     protected Model $_model;
-    protected array $_validatedParms;
 
     public function setWriterModel(): void
     {
@@ -67,7 +66,7 @@ class ApplicationController extends Controller
                     throw new InvalidArgumentException("Invalid $parm format: $value, $comment");
                 }
             }
-            $this->_validatedParms = $validatedParms;
+            $this->_namedParameters = $validatedParms;
         }
     }
     //Overrriding beforFilter to apply validation if any parameter is passed.
@@ -85,33 +84,67 @@ class ApplicationController extends Controller
             exit;
         }
         if (isset($this->_validatedParms['keywords'])) {
-            $this->_validatedParms['keywords'] = explode(' ', strtolower($this->_validatedParms['keywords']));
+            $this->_namedParameters['keywords'] = explode(' ', strtolower($this->_namedParameters['keywords']));
         }
     }
 
     // Function to get the validation status of each parameter after beforeFilters is run
-    public function isIdValid(): bool
+    public function getParmId(): ?string
     {
-        return !($this->_validatedParms['id'] === false);
+        return $this->_namedParameters['id'] ?? null;
     }
-    public function isStatusValid(): bool
+    public function getParmStatus(): ?Status
     {
-        return !($this->_validatedParms['status'] === false);
+        return isset($this->_namedParameters['status']) ? Status::from($this->_namedParameters['status']) : null;
     }
-    public function isToValid(): bool
+    public function getParmTo(): ?DateTime
     {
-        return !($this->_validatedParms['to'] === false);
+        $time = DateTime::createFromFormat('H:i', $this->_namedParameters['to'], new DateTimeZone(date_default_timezone_get()));
+        return $time ?: null;
     }
-    public function isFromValid(): bool
+    public function getParmFrom(): ?DateTime
     {
-        return !($this->_validatedParms['id'] === false);
+        $time = DateTime::createFromFormat('H:i', $this->_namedParameters['from'], new DateTimeZone(date_default_timezone_get()));
+        return $time ?: null;
     }
-    public function isKeywordsValid(): bool
+    public function getParmKeywords(): ?array
     {
-        return !($this->_validatedParms['kewywords'] === false);
+        return $this->_namedParameters['keywords'] ?? null;
     }
-    public function isCreatedByValid(): bool
+    public function getParmCreatedBy(): ?string
     {
-        return !($this->_validatedParms['createdBy'] === false);
+        return $this->_namedParameters['createdBy'] ?? null;
+    }
+    public function getTasksArray(): array
+    {
+        $tasks_as_array = [];
+        foreach ($this->view->tasks as $task) {
+            $tasks_as_array[] = $task->getArray();
+        }
+        return $tasks_as_array;
+    }
+    public function setTasks(array $tasks_in_model)
+    {
+        $task_as_object = [];
+        foreach ($tasks_in_model as $task_array) {
+            try {
+                $task_as_object[] = new Task(
+                    $task_array['id'], // property id
+                    $task_array['description'], // property description
+                    $task_array['status'], // property status
+                    $task_array['start_time'], // property from
+                    $task_array['end_time'], // property to
+                    $task_array['created_by'] // property createdBy
+                );
+            } catch (ValueError | TypeError | InvalidArgumentException $e) {
+                $this->view->disableView();
+                $this->view->disableLayout();
+                $errorController = new ErrorController;
+                $errorController->setException($e);
+                $errorController->execute('error');
+                exit;
+            }
+        }
+        $this->view->tasks = $task_as_object;
     }
 }

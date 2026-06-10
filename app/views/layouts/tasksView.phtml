@@ -2,6 +2,7 @@
 
 $tasks = $this->tasks;
 
+
 echo buildTableView($tasks);
 
 function buildTableView(array $tasks): string
@@ -42,12 +43,12 @@ function printRowTable(int $index, Task $task): string
 							<span
 								class="px-3 py-1 rounded-full text-xs font-medium';
     echo match ($task->getStatusEnum()) {
-        Status::PENDING => ' bg-indigo-100 text-indigo-400">' . $task->getStatus() . '</span></td>' . PHP_EOL,
-        Status::INPROGRESS => ' bg-yellow-100 text-yellow-600">' . $task->getStatus() . '</span></td>' . PHP_EOL,
-        Status::COMPLETED => ' bg-green-100 text-green-600">' . $task->getStatus() . '</span></td>' . PHP_EOL,
+        Status::PENDING => ' bg-indigo-100 text-indigo-400">' . $task->getStatusEnum()->value . '</span></td>' . PHP_EOL,
+        Status::INPROGRESS => ' bg-yellow-100 text-yellow-600">' . $task->getStatusEnum()->value . '</span></td>' . PHP_EOL,
+        Status::COMPLETED => ' bg-green-100 text-green-600">' . $task->getStatusEnum()->value . '</span></td>' . PHP_EOL,
     };
-    echo '<td class="px-6 py-4">' . $task->getStartTime() . '</td>' . PHP_EOL;
-    echo '<td class="px-6 py-4">' . $task->getEndTime() . '</td>' . PHP_EOL;
+    echo '<td class="px-6 py-4">' . $task->getFrom() . '</td>' . PHP_EOL;
+    echo '<td class="px-6 py-4">' . $task->getTo() . '</td>' . PHP_EOL;
     echo '<td class="px-6 py-4">' . $task->getCreatedBy() . '</td>' . PHP_EOL;
     echo "<td class=\"px-6 py-4 flex items-center gap-3 \">
 							<a href=\"/Alan: ruta por definir/{$task->getId()}\" class=\"text-gray-400 hover:text-indigo-600 transition-colors\">
