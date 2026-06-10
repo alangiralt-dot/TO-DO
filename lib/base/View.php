@@ -68,6 +68,13 @@ class View
   		include(ROOT_PATH . '/app/views/layouts/' . $this->_getLayout() . '.phtml');
 	  }
 	}
+    
+    public function breakConventionToReuseViews(string $viewPath): void {
+		ob_start();
+		include(ROOT_PATH . '/app/views/' . $viewPath);
+		$this->_content .= ob_get_clean();
+        $this->disableView();
+    }
 	
 	/**
 	 * Renders the given data as json
