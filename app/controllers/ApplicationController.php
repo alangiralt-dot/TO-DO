@@ -63,7 +63,7 @@ class ApplicationController extends Controller
                     'createdBy' => 'user name should be alphanumerical only.',
                     default => 'failed input data validation, check the system logs.'
                 };
-                throw new InvalidArgumentException("Invalid $parm format, $comment");
+                throw new InvalidArgumentException("Invalid $parm format: $value, $comment");
             }
         }
     }
