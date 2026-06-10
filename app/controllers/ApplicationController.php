@@ -7,7 +7,7 @@
 class ApplicationController extends Controller
 {
     protected Model $_model;
-    protected array $_validatedParm;
+    protected array $_validatedParms;
 
     public function setWriterModel(): void
     {
@@ -66,6 +66,7 @@ class ApplicationController extends Controller
                 throw new InvalidArgumentException("Invalid $parm format: $value, $comment");
             }
         }
+        $this->_validatedParms = $validatedParms;
     }
 
     #[Override]
@@ -81,5 +82,33 @@ class ApplicationController extends Controller
             $errorController->execute('error');
             exit;
         }
+        if (isset($this->_validatedParms['keywords'])) {
+            $this->_validatedParms['keywords'] = explode(' ', strtolower($this->_validatedParms['keywords']));
+        }
+    }
+
+    public function isIdValid(): bool
+    {
+        return !($this->_validatedParms['id'] === false);
+    }
+    public function isStatusValid(): bool
+    {
+        return !($this->_validatedParms['status'] === false);
+    }
+    public function isToValid(): bool
+    {
+        return !($this->_validatedParms['to'] === false);
+    }
+    public function isFromValid(): bool
+    {
+        return !($this->_validatedParms['id'] === false);
+    }
+    public function isKeywordsValid(): bool
+    {
+        return !($this->_validatedParms['kewywords'] === false);
+    }
+    public function isCreatedByValid(): bool
+    {
+        return !($this->_validatedParms['createdBy'] === false);
     }
 }
