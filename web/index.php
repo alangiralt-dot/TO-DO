@@ -35,6 +35,8 @@ function autoloader($className)
 			require_once ROOT_PATH . '/lib/' . $className . '.php';
 		} else if (file_exists(ROOT_PATH . '/app/controllers/classes/' . $className . '.php')) {
 			require_once ROOT_PATH . '/app/controllers/classes/' . $className . '.php';
+		} else if (file_exists(ROOT_PATH . '/app/models/classes/' . $className . '.php')) {
+			require_once ROOT_PATH . '/app/models/classes/' . $className . '.php';
 		} else {
 			require_once ROOT_PATH . '/app/models/' . $className . '.php';
 		}

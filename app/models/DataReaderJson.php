@@ -3,7 +3,7 @@
 class DataReaderJson extends Model implements Reader
 {
 
-    public const PERSISTANCE_PATH = ROOT_PATH . '/app/models/classes/persistanceData.json';
+    public const PERSISTANCE_PATH = ROOT_PATH . '/app/models/persistance/persistanceData.json';
     #[Override]
     public function __construct()
     {
@@ -45,7 +45,7 @@ class DataReaderJson extends Model implements Reader
             default => null
         };
 
-        if (!is_null($parms)) {
+        if (!is_null($parms) && !empty($parms)) {
             $data = array_filter($data, fn($task) => $this->matchByParms($task, $parms));
         }
         $data = $this->modifyKeyWithId($data);

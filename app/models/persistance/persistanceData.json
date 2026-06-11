@@ -18,7 +18,7 @@
     {
         "id": "g7h8i9",
         "description": "Implement task table UI",
-        "status": "InProgress",
+        "status": "In Progress",
         "start_time": "11:15",
         "end_time": "13:00",
         "created_by": "Bob Martinez"
@@ -26,7 +26,7 @@
     {
         "id": "j1k2l3",
         "description": "Connect views to the layout",
-        "status": "InProgress",
+        "status": "In Progress",
         "start_time": "13:30",
         "end_time": "15:00",
         "created_by": "Bob Martinez"
@@ -58,7 +58,7 @@
     {
         "id": "v4w5x6",
         "description": "Implement JSON data reader",
-        "status": "InProgress",
+        "status": "In Progress",
         "start_time": "10:00",
         "end_time": "12:00",
         "created_by": "David Brown"
@@ -90,7 +90,7 @@
     {
         "id": "h7i8j9",
         "description": "Implement session management",
-        "status": "InProgress",
+        "status": "In Progress",
         "start_time": "10:45",
         "end_time": "12:15",
         "created_by": "Frank Garcia"
@@ -154,7 +154,7 @@
     {
         "id": "f4g5h6",
         "description": "Implement task deletion logic",
-        "status": "InProgress",
+        "status": "In Progress",
         "start_time": "11:00",
         "end_time": "12:30",
         "created_by": "James Turner"

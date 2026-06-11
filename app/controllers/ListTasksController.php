@@ -13,7 +13,6 @@ class ListTasksController extends ApplicationController
         } catch (RuntimeException $e) {
             $this->handleError($e);
         }
-
         //Store tasks as objects
         $this->setTasks($tasks);
     }
