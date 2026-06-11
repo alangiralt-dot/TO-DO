@@ -15,9 +15,18 @@ class DataReaderJson extends Model implements Reader
 
         $condition = true;
         foreach ($parms as $parmName => $parmValue) {
+
+            if (in_array($parmName, ['to', 'from'])) {
+                $parmName = $parmName === 'to' ? 'end_time' : 'start_time';
+            }
+
             $value = is_array($task) ? ($task[$parmName] ?? null) : ($task->$parmName ?? null);
             if (!is_null($value)) {
-                $condition &= ($value === $parmValue);
+                $condition &= match ($parmName) {
+                    'end_time' => $value <= $parmValue,
+                    'start_time' => $value >= $parmValue,
+                    default => $value === $parmValue
+                };
             }
         }
         return $condition;
