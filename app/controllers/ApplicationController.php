@@ -167,6 +167,9 @@ class ApplicationController extends Controller
                 }
             }
             $this->view->tasks = $task_as_object;
+        } else {
+            $e = new InvalidArgumentException("No tasks found!");
+            $this->handleError($e);
         }
     }
 }
