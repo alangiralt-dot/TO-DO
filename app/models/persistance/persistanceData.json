@@ -1,0 +1,162 @@
+[
+    {
+        "id": "a1b2c3",
+        "description": "Design the app layout",
+        "status": "Completed",
+        "start_time": "08:00",
+        "end_time": "09:30",
+        "created_by": "Alice Johnson"
+    },
+    {
+        "id": "d4e5f6",
+        "description": "Build the filter bar component",
+        "status": "Completed",
+        "start_time": "09:45",
+        "end_time": "11:00",
+        "created_by": "Alice Johnson"
+    },
+    {
+        "id": "g7h8i9",
+        "description": "Implement task table UI",
+        "status": "InProgress",
+        "start_time": "11:15",
+        "end_time": "13:00",
+        "created_by": "Bob Martinez"
+    },
+    {
+        "id": "j1k2l3",
+        "description": "Connect views to the layout",
+        "status": "InProgress",
+        "start_time": "13:30",
+        "end_time": "15:00",
+        "created_by": "Bob Martinez"
+    },
+    {
+        "id": "m4n5o6",
+        "description": "Write unit tests for controllers",
+        "status": "Pending",
+        "start_time": "15:30",
+        "end_time": "17:00",
+        "created_by": "Carol Smith"
+    },
+    {
+        "id": "p7q8r9",
+        "description": "Set up database connection",
+        "status": "Completed",
+        "start_time": "07:00",
+        "end_time": "08:30",
+        "created_by": "Carol Smith"
+    },
+    {
+        "id": "s1t2u3",
+        "description": "Create error controller",
+        "status": "Completed",
+        "start_time": "08:30",
+        "end_time": "09:45",
+        "created_by": "David Brown"
+    },
+    {
+        "id": "v4w5x6",
+        "description": "Implement JSON data reader",
+        "status": "InProgress",
+        "start_time": "10:00",
+        "end_time": "12:00",
+        "created_by": "David Brown"
+    },
+    {
+        "id": "y7z8a9",
+        "description": "Add parameter validation",
+        "status": "Pending",
+        "start_time": "12:30",
+        "end_time": "14:00",
+        "created_by": "Eve Wilson"
+    },
+    {
+        "id": "b1c2d3",
+        "description": "Design the footer component",
+        "status": "Pending",
+        "start_time": "14:30",
+        "end_time": "16:00",
+        "created_by": "Eve Wilson"
+    },
+    {
+        "id": "e4f5g6",
+        "description": "Refactor application controller",
+        "status": "Completed",
+        "start_time": "09:00",
+        "end_time": "10:30",
+        "created_by": "Frank Garcia"
+    },
+    {
+        "id": "h7i8j9",
+        "description": "Implement session management",
+        "status": "InProgress",
+        "start_time": "10:45",
+        "end_time": "12:15",
+        "created_by": "Frank Garcia"
+    },
+    {
+        "id": "k1l2m3",
+        "description": "Create base model class",
+        "status": "Completed",
+        "start_time": "07:30",
+        "end_time": "09:00",
+        "created_by": "Grace Lee"
+    },
+    {
+        "id": "n4o5p6",
+        "description": "Add flash message support",
+        "status": "Pending",
+        "start_time": "13:00",
+        "end_time": "14:30",
+        "created_by": "Grace Lee"
+    },
+    {
+        "id": "q7r8s9",
+        "description": "Implement router class",
+        "status": "Completed",
+        "start_time": "08:00",
+        "end_time": "10:00",
+        "created_by": "Henry Clark"
+    },
+    {
+        "id": "t1u2v3",
+        "description": "Write integration tests",
+        "status": "Pending",
+        "start_time": "15:00",
+        "end_time": "17:00",
+        "created_by": "Henry Clark"
+    },
+    {
+        "id": "w4x5y6",
+        "description": "Configure XAMPP environment",
+        "status": "Completed",
+        "start_time": "07:00",
+        "end_time": "07:45",
+        "created_by": "Irene White"
+    },
+    {
+        "id": "z7a8b9",
+        "description": "Set up project folder structure",
+        "status": "Completed",
+        "start_time": "07:45",
+        "end_time": "08:30",
+        "created_by": "Irene White"
+    },
+    {
+        "id": "c1d2e3",
+        "description": "Design login view",
+        "status": "Pending",
+        "start_time": "14:00",
+        "end_time": "15:30",
+        "created_by": "James Turner"
+    },
+    {
+        "id": "f4g5h6",
+        "description": "Implement task deletion logic",
+        "status": "InProgress",
+        "start_time": "11:00",
+        "end_time": "12:30",
+        "created_by": "James Turner"
+    }
+]
