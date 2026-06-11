@@ -29,4 +29,24 @@ class DataWriter implements ManageTasksToController {
         ];
         return $this->saveTasks($tasks);
     }
+    public function updateTask(array $data): bool {
+        $tasks = $this->readTasks();
+        $id = $data['id'] ?? '';
+        
+        foreach ($tasks as &$t) {
+            if ($t['id'] === $id) {
+
+                $t['description'] = $data['description'];
+                $t['status']      = $data['status'];
+                $t['created_by']  = $data['created_by'];
+                $t['start_time']  = $data['start_time'];
+                $t['end_time']  = $data['end_time'];
+
+                return $this->saveTasks($tasks);
+            }
+        }
+        unset($t);
+        
+        return false;
+    }
 }

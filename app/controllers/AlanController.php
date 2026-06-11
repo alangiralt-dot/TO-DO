@@ -45,6 +45,26 @@ class AlanController extends ApplicationController {
             $this->view->breakConventionToReuseViews('partials/_response.phtml');
         }
     }
+    public function updateAction() {
+        if ($this->getRequest()->isPost()) {
+            $formData = [
+                'id'          => $this->_getParam('id'),
+                'description' => $this->_getParam('description'),
+                'status'      => $this->_getParam('status'),
+                'created_by'  => $this->_getParam('created_by'),
+                'start_time'  => $this->_getParam('start_time') ?? '',
+                'end_time'    => $this->_getParam('end_time') ?? ''
+            ];
+
+            $this->writer->updateTask($formData);
+
+            $this->view->responseHeaderMessage = "Task Updated Successfully!";
+            $this->view->responseBodyMessage   = $this->getRandomWelcomeMessage();
+
+            $this->view->breakConventionToReuseViews('partials/_response.phtml');
+        }
+    }
+
     public function editAction() {
         $taskId = $this->_getParam('id');
         $realTask = $this->reader->getTaskById($taskId);
