@@ -1,5 +1,9 @@
 <?php
 class AlanController extends ApplicationController {
+    private ManageTasksToController $writer;
+    public function __construct() {
+        $this->writer = new DataWriter();
+    }
     public function openAction() {
         $welcomeHeaders = [
             "Welcome to your Workspace!",
@@ -19,8 +23,19 @@ class AlanController extends ApplicationController {
     }
     public function addAction() {
         if ($this->getRequest()->isPost()) {
-            $this->view->responseHeaderMessage = "Task Received Successfully!";
+            $formData = [
+                'description' => $this->_getParam('description'),
+                'status'      => $this->_getParam('status'),
+                'created_by'  => $this->_getParam('created_by'),
+                'start_time'  => $this->_getParam('start_time') ?? '',
+                'end_time'    => $this->_getParam('end_time') ?? ''
+            ];
+
+            $this->writer->addTask($formData);
+
+            $this->view->responseHeaderMessage = "Task Saved Successfully!";
             $this->view->responseBodyMessage   = $this->getRandomWelcomeMessage();
+
             $this->view->breakConventionToReuseViews('partials/_response.phtml');
         }
     }
