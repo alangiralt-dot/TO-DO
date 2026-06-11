@@ -17,7 +17,13 @@ class AlanController extends ApplicationController {
     public function createAction() {
         $this->view->breakConventionToReuseViews('partials/_form.phtml');
     }
-
+    public function addAction() {
+        if ($this->getRequest()->isPost()) {
+            $this->view->responseHeaderMessage = "Task Received Successfully!";
+            $this->view->responseBodyMessage   = $this->getRandomWelcomeMessage();
+            $this->view->breakConventionToReuseViews('partials/_response.phtml');
+        }
+    }
     private function getRandomWelcomeMessage(): string {
         $welcomeMessages = [
             "Click 'List Tasks' at the top to explore your team's board, or click 'Add Task' to initiate a brand new project.",
