@@ -15,8 +15,8 @@ class AlanController extends ApplicationController {
             "Use the navigation menu at the top to 'List Tasks' or prepare a fresh action with 'Add Task'."
         ];
         
-        $this->view->headerText = $welcomeHeaders[array_rand($welcomeHeaders)];
-        $this->view->welcomeMessage = $welcomeMessages[array_rand($welcomeMessages)];
+        $this->view->responseHeaderMessage = $welcomeHeaders[array_rand($welcomeHeaders)];
+        $this->view->responseBodyMessage = $welcomeMessages[array_rand($welcomeMessages)];
         
         $this->view->breakConventionToReuseViews('partials/_response.phtml');
     }
