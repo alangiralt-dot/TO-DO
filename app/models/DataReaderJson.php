@@ -23,22 +23,30 @@ class DataReaderJson extends Model implements Reader
         return $condition;
     }
 
-    public function fetchByParms(?array $parms): array|stdClass|null
+    private function modifyKeyWithId(array $data): array
+    {
+        $dataId = [];
+        foreach ($data as $task) {
+            $id = is_array($task) ? $task['id'] : $task->id;
+            $dataId[$id] = $task;
+        }
+        return $dataId;
+    }
+
+    public function fetchByParms(?array $parms = null): array|stdClass|null
     {
         $json = file_get_contents(self::PERSISTANCE_PATH);
         $data = json_decode($json);
-        if (is_null($parms)) {
-            return $data;
+        if (!is_null($parms)) {
+            $data = array_filter($data, fn($task) => $this->matchByParms($task, $parms));
         }
-        $data = array_filter($data, fn($task) => $this->matchByParms($task, $parms));
-        if (count($data) > 1) {
-            $dataId = [];
-            foreach ($data as $task) {
-                $id = is_array($task) ? $task['id'] : $task->id;
-                $dataId[$id] = $task;
-            }
-            return $dataId;
-        }
-        return array_shift($data);
+        $data = $this->modifyKeyWithId($data);
+        return (count($data) > 1) ? $data : array_shift($data);
+    }
+
+    #[Override]
+    public function fetchOne($id)
+    {
+        return array_key_exists($id, $this->fetchByParms());
     }
 }
