@@ -2,11 +2,8 @@
 // app/models/DataWriter.php
 
 class DataWriter implements ManageTasksToController {
-    private string $filePath;
 
-    public function __construct() {
-        $this->filePath = ROOT_PATH . '/app/models/seed_to_do.json';
-    }
+    private string $filePath = ROOT_PATH . '/app/models/seed_to_do.json';
 
     private function readTasks(): array {
         if (!file_exists($this->filePath)) {
