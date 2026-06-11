@@ -13,5 +13,6 @@ $routes = array(
     '/test' => 'test#index',
     '/'                 => 'alan#open', // Open App
     '/alan/create' => 'alan#create', // Add Task
-    '/alan/add'   => 'alan#add' // Add Task
+    '/alan/add'   => 'alan#add', // Add Task
+    '/alan/edit/:id' => 'alan#edit'
 );

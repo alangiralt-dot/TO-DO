@@ -1,8 +1,10 @@
 <?php
 class AlanController extends ApplicationController {
     private ManageTasksToController $writer;
+    private ReadTasksToController $reader;
     public function __construct() {
         $this->writer = new DataWriter();
+        $this->reader = new DataReader();
     }
     public function openAction() {
         $welcomeHeaders = [
@@ -42,6 +44,14 @@ class AlanController extends ApplicationController {
 
             $this->view->breakConventionToReuseViews('partials/_response.phtml');
         }
+    }
+    public function editAction() {
+        $taskId = $this->_getParam('id');
+        $realTask = $this->reader->getTaskById($taskId);
+        if ($realTask !== null) {
+            $this->view->taskData = $realTask;
+        }
+        $this->view->breakConventionToReuseViews('partials/_form.phtml');
     }
     private function getRandomWelcomeMessage(): string {
         $welcomeMessages = [
