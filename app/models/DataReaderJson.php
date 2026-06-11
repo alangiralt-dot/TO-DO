@@ -35,8 +35,16 @@ class DataReaderJson extends Model implements Reader
 
     public function fetchByParms(?array $parms = null): array|stdClass|null
     {
+
         $json = file_get_contents(self::PERSISTANCE_PATH);
         $data = json_decode($json);
+        match (true) {
+            !file_exists(self::PERSISTANCE_PATH) => throw new RuntimeException('Persistence file not found: ' . self::PERSISTANCE_PATH),
+            empty($json) => throw new RuntimeException('Persistence file is empty.'),
+            (json_last_error() !== JSON_ERROR_NONE) => throw new RuntimeException('Invalid JSON: ' . json_last_error_msg()),
+            default => null
+        };
+
         if (!is_null($parms)) {
             $data = array_filter($data, fn($task) => $this->matchByParms($task, $parms));
         }
@@ -47,6 +55,6 @@ class DataReaderJson extends Model implements Reader
     #[Override]
     public function fetchOne($id)
     {
-        return array_key_exists($id, $this->fetchByParms());
+        return ($this->fetchByParms())[$id] ?? null;
     }
 }

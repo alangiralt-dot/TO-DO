@@ -8,7 +8,7 @@ class ApplicationController extends Controller
 {
     protected Model $_model;
 
-    private function handleError(\Throwable $e): void
+    protected function handleError(\Throwable $e): void
     {
         $this->view->disableView();
         $this->view->disableLayout();
