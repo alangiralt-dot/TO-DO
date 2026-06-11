@@ -9,33 +9,60 @@
 	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
+<<<<<<< HEAD
 <body class="bg-indigo-50/[0.70] h-screen flex flex-col font-sans gap-12 overflow-hidden">
 	<!-- Header -->
 	<header class=" bg-white border-b border-gray-100 px-20 py-4 flex items-center justify-between">
 		<div class="flex items-center gap-4">
 			<a href="<?php /* ALAN NEEDS TO DEFINE ROOT HERE */ ?>" class="bg-indigo-600 rounded-2xl p-2.5">
+=======
+<body class="bg-indigo-50/[0.70] min-h-screen flex flex-col font-sans gap-12">
+	<!-- Header -->
+	<header class=" bg-white border-b border-gray-100 px-20 py-4 flex items-center justify-between">
+		<div class="flex items-center gap-4">
+			<div class="bg-indigo-600 rounded-2xl p-2.5">
+>>>>>>> Develop
 				<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
 					stroke="currentColor" stroke-width="2.5">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
 				</svg>
+<<<<<<< HEAD
 			</a>
+=======
+			</div>
+>>>>>>> Develop
 			<div>
 				<h1 class="text-2xl font-bold text-gray-900 leading-tight">TO-DO</h1>
 				<p class="text-sm text-gray-400">Focus on what matters, one task at a time.</p>
 			</div>
 		</div>
 		<div class="flex gap-2">
+<<<<<<< HEAD
 			<a href="<?php /* ALAN NEEDS TO DEFINE ROOT HERE */ ?>"
 				class="bg-indigo-600 hover:bg-indigo-900 hover:border-gray-200 text-white px-5 py-2 rounded-xl font-medium text-sm transition-colors"
 				title="create a new task!">Add Task</a>
 			<a href="<?php echo WEB_ROOT; ?>/listTasks"
 				class="bg-indigo-600 hover:bg-indigo-900 hover:border-gray-200 text-white px-5 py-2 rounded-xl font-medium text-sm transition-colors"
 				title="filter the database!">List Tasks</a>
+=======
+			<a href="Alan: definir ruta"
+				class="bg-indigo-600 hover:bg-indigo-900 hover:border-gray-200 text-white px-5 py-2 rounded-xl font-medium text-sm transition-colors"
+				title="create a new task!">Add
+				Task</a>
+			<a href="Edwin: definir ruta"
+				class="bg-indigo-600 hover:bg-indigo-900 hover:border-gray-200 text-white px-5 py-2 rounded-xl font-medium text-sm transition-colors"
+				title="list all the tasks">View
+				All</a>
+>>>>>>> Develop
 		</div>
 	</header>
 
 	<!-- Main content -->
+<<<<<<< HEAD
 	<main class="flex-1 flex flex-col gap-8 py-0 w-full max-w-6xl mx-auto overflow-hidden">
+=======
+	<main class="flex-1 flex flex-col gap-8 py-0 w-full max-w-6xl mx-auto">
+>>>>>>> Develop
 		<?php echo $this->content(); ?>
 	</main>
 
