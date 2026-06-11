@@ -12,8 +12,12 @@ class AlanController extends ApplicationController {
             "Ready to get things done?",
             "Organization is the key to success!"
         ];
-
-        $this->view->responseHeaderMessage = $welcomeHeaders[array_rand($welcomeHeaders)];
+        if ($this->_getParam('cancelled') === '1') {
+            $this->view->responseHeaderMessage = $this->getRandomCancelHeader();
+        } else {
+            $this->view->responseHeaderMessage = $welcomeHeaders[array_rand($welcomeHeaders)];
+        }
+        
         $this->view->responseBodyMessage = $this->getRandomWelcomeMessage();
         
         $this->view->breakConventionToReuseViews('partials/_response.phtml');
@@ -46,5 +50,15 @@ class AlanController extends ApplicationController {
             "Use the navigation menu at the top to 'List Tasks' or prepare a fresh action with 'Add Task'."
         ];
         return $welcomeMessages[array_rand($welcomeMessages)];
+    }
+    private function getRandomCancelHeader(): string {
+        $cancelHeaders = [
+            "Second thoughts are best!",
+            "Changed your mind? Wise choice.",
+            "Aborting mission! No tasks were harmed.",
+            "Breathe in, breathe out. Plans change!",
+            "Clean slate! No pressure."
+        ];
+        return $cancelHeaders[array_rand($cancelHeaders)];
     }
 }
