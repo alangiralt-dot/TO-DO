@@ -61,7 +61,8 @@ class ApplicationController extends Controller
                     ]
                 ]
             ];
-            $validatedParms = array_filter(filter_var_array($initialParms, $validations));
+            $validatedParms = filter_var_array($initialParms, $validations);
+            $validatedParms = array_filter($validatedParms, fn($parm) => !is_null($parm));
 
             foreach ($initialParms as $parm => $value) {
                 if ($validatedParms[$parm] === false) {
