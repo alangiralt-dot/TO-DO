@@ -31,7 +31,7 @@ class ApplicationController extends Controller
     private function validateParms(): void
     {
 
-        $initialParms = parent::_getAllParams();
+        $initialParms = array_filter(parent::_getAllParams()); //EDB: Fix para eliminar los parametros que no se pasaron.
         if (count($initialParms) > 0) {
             $validations = [
                 'id' => [
@@ -61,7 +61,7 @@ class ApplicationController extends Controller
                     ]
                 ]
             ];
-            $validatedParms = filter_var_array($initialParms, $validations);
+            $validatedParms = array_filter(filter_var_array($initialParms, $validations));
 
             foreach ($initialParms as $parm => $value) {
                 if ($validatedParms[$parm] === false) {
@@ -128,43 +128,45 @@ class ApplicationController extends Controller
         }
         return $tasks_as_array;
     }
-    public function setTasks(array $tasks_in_model)
+    public function setTasks(?array $tasks_in_model = null)
     {
-        $task_as_object = [];
-        foreach ($tasks_in_model as $task) {
-            if (is_array($task)) {
-                try {
-                    $task_as_object[] = new Task(
-                        $task['id'], // property id
-                        $task['description'], // property description
-                        $task['status'], // property status
-                        $task['start_time'], // property from
-                        $task['end_time'], // property to
-                        $task['created_by'] // property createdBy
-                    );
-                } catch (ValueError | TypeError | InvalidArgumentException $e) {
+        if (!is_null($tasks_in_model) && !empty($tasks_in_model)) {
+            $task_as_object = [];
+            foreach ($tasks_in_model as $task) {
+                if (is_array($task)) {
+                    try {
+                        $task_as_object[] = new Task(
+                            $task['id'], // property id
+                            $task['description'], // property description
+                            $task['status'], // property status
+                            $task['start_time'], // property from
+                            $task['end_time'], // property to
+                            $task['created_by'] // property createdBy
+                        );
+                    } catch (ValueError | TypeError | InvalidArgumentException $e) {
+                        $this->handleError($e);
+                    }
+                } else if ($task instanceof stdClass) {
+                    try {
+                        $task_as_object[] = new Task(
+                            $task->id, // property id
+                            $task->description, // property description
+                            $task->status, // property status
+                            $task->start_time, // property from
+                            $task->end_time, // property to
+                            $task->created_by // property createdBy
+                        );
+                    } catch (ValueError | TypeError | InvalidArgumentException $e) {
+                        $this->handleError($e);
+                    }
+                } else if ($task instanceof Task) {
+                    $task_as_object[] = $task;
+                } else {
+                    $e = new InvalidArgumentException("Task data type is not array, stdClass or Task to be stored.");
                     $this->handleError($e);
                 }
-            } else if ($task instanceof stdClass) {
-                try {
-                    $task_as_object[] = new Task(
-                        $task->id, // property id
-                        $task->description, // property description
-                        $task->status, // property status
-                        $task->start_time, // property from
-                        $task->end_time, // property to
-                        $task->created_by // property createdBy
-                    );
-                } catch (ValueError | TypeError | InvalidArgumentException $e) {
-                    $this->handleError($e);
-                }
-            } else if ($task instanceof Task) {
-                $task_as_object[] = $task;
-            } else {
-                $e = new InvalidArgumentException("Task data type is not array, stdClass or Task to be stored.");
-                $this->handleError($e);
             }
+            $this->view->tasks = $task_as_object;
         }
-        $this->view->tasks = $task_as_object;
     }
 }

@@ -16,8 +16,12 @@ class DataReaderJson extends Model implements Reader
         $condition = true;
         foreach ($parms as $parmName => $parmValue) {
 
-            if (in_array($parmName, ['to', 'from'])) {
-                $parmName = $parmName === 'to' ? 'end_time' : 'start_time';
+            if (in_array($parmName, ['to', 'from','createdBy'])) {
+                $parmName = match($parmName){
+                    'to' => 'end_time',
+                    'from' => 'start_time',
+                    'createdBy' => 'created_by',
+                    default => $parmName};
             }
 
             $value = is_array($task) ? ($task[$parmName] ?? null) : ($task->$parmName ?? null);
@@ -25,8 +29,12 @@ class DataReaderJson extends Model implements Reader
                 $condition &= match ($parmName) {
                     'end_time' => $value <= $parmValue,
                     'start_time' => $value >= $parmValue,
+                    'created_by' => strcasecmp($value, $parmValue)
                     default => $value === $parmValue
                 };
+            }
+            if (!$condition) {
+                break;
             }
         }
         return $condition;
