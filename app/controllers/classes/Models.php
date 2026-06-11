@@ -1,6 +1,6 @@
 <?php
 enum Models: string
 {
-    case READER = 'JsonDataReader';
+    case READER = 'DataReaderJson';
     case WRITER = 'DataWriter';
 }

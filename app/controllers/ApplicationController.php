@@ -8,6 +8,16 @@ class ApplicationController extends Controller
 {
     protected Model $_model;
 
+    private function handleError(\Throwable $e): void
+    {
+        $this->view->disableView();
+        $this->view->disableLayout();
+        $errorController = new ErrorController();
+        $errorController->setException($e);
+        $errorController->execute('error');
+        exit;
+    }
+
     public function setWriterModel(): void
     {
         $this->_model = new (Models::WRITER->value);
@@ -76,12 +86,7 @@ class ApplicationController extends Controller
         try {
             $this->validateParms();
         } catch (InvalidArgumentException $e) {
-            $this->view->disableView();
-            $this->view->disableLayout();
-            $errorController = new ErrorController;
-            $errorController->setException($e);
-            $errorController->execute('error');
-            exit;
+            $this->handleError($e);
         }
         if (isset($this->_validatedParms['keywords'])) {
             $this->_namedParameters['keywords'] = explode(' ', strtolower($this->_namedParameters['keywords']));
@@ -126,23 +131,38 @@ class ApplicationController extends Controller
     public function setTasks(array $tasks_in_model)
     {
         $task_as_object = [];
-        foreach ($tasks_in_model as $task_array) {
-            try {
-                $task_as_object[] = new Task(
-                    $task_array['id'], // property id
-                    $task_array['description'], // property description
-                    $task_array['status'], // property status
-                    $task_array['start_time'], // property from
-                    $task_array['end_time'], // property to
-                    $task_array['created_by'] // property createdBy
-                );
-            } catch (ValueError | TypeError | InvalidArgumentException $e) {
-                $this->view->disableView();
-                $this->view->disableLayout();
-                $errorController = new ErrorController;
-                $errorController->setException($e);
-                $errorController->execute('error');
-                exit;
+        foreach ($tasks_in_model as $task) {
+            if (is_array($task)) {
+                try {
+                    $task_as_object[] = new Task(
+                        $task['id'], // property id
+                        $task['description'], // property description
+                        $task['status'], // property status
+                        $task['start_time'], // property from
+                        $task['end_time'], // property to
+                        $task['created_by'] // property createdBy
+                    );
+                } catch (ValueError | TypeError | InvalidArgumentException $e) {
+                    $this->handleError($e);
+                }
+            } else if ($task instanceof stdClass) {
+                try {
+                    $task_as_object[] = new Task(
+                        $task->id, // property id
+                        $task->description, // property description
+                        $task->status, // property status
+                        $task->start_time, // property from
+                        $task->end_time, // property to
+                        $task->created_by // property createdBy
+                    );
+                } catch (ValueError | TypeError | InvalidArgumentException $e) {
+                    $this->handleError($e);
+                }
+            } else if ($task instanceof Task) {
+                $task_as_object[] = $task;
+            } else {
+                $e = new InvalidArgumentException("Task data type is not array, stdClass or Task to be stored.");
+                $this->handleError($e);
             }
         }
         $this->view->tasks = $task_as_object;
